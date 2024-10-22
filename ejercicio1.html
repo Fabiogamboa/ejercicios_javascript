@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificación del Estudiante</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .divgogo{
+            background-color:rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>par o impar :v</h1>
+        <input type="number" id="numerogogo" placeholder="Ingrese un numero pa saber si es par o impar">
+        <button id="evaluar">Evaluar</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+
+        function tomarDatos() {
+            const inputgogo = document.getElementById('numerogogo');
+            return parseInt(inputgogo.value);
+        }
+
+        function procesarxd(numins) {
+            if (numins % 2 == 0) {
+                return "Es par.";
+            } else {
+                return "Es impar.";
+            }
+        }
+
+        function mostrarResultado(resultado) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = resultado;
+        }
+
+        const botonEvaluar = document.getElementById('evaluar');
+            botonEvaluar.addEventListener('click', () => {
+            const numxd = tomarDatos();
+            if (isNaN(numxd)) {
+                mostrarResultado("Por favor, ingrese un número válido.");
+                return;
+            }
+            const resultado = procesarxd(numxd);
+            mostrarResultado(resultado);
+        });
+    </script>
+</body>
+</html>

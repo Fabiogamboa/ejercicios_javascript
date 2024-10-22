@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificación del Estudiante</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .divgogo{
+            background-color:rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Calificación de Estudiantes :v</h1>
+        <input type="number" id="calificacion" placeholder="Ingrese la calificación">
+        <button id="evaluar">Evaluar</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+
+        function tomarDatos() {
+            const inputCalificacion = document.getElementById('calificacion');
+            return parseInt(inputCalificacion.value);
+        }
+
+        function procesarCalificacion(calificacion) {
+            if (calificacion >= 60) {
+                return "El estudiante ha aprobado.";
+            } else {
+                return "El estudiante no ha aprobado.";
+            }
+        }
+
+        function mostrarResultado(resultado) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = resultado;
+        }
+        
+        const botonEvaluar = document.getElementById('evaluar');
+            botonEvaluar.addEventListener('click', () => {
+            const calificacionEstudiante = tomarDatos();
+            if (isNaN(calificacionEstudiante)) {
+                mostrarResultado("Por favor, ingrese un número válido.");
+                return;
+            }
+            const resultado = procesarCalificacion(calificacionEstudiante);
+            mostrarResultado(resultado);
+        });
+    </script>
+</body>
+</html>
