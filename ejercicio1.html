@@ -27,37 +27,35 @@
         <button id="evaluar">Evaluar</button>
         <p id="resultado"></p>
     </div>
-
-    <script>
-
-        function tomarDatos() {
-            const inputgogo = document.getElementById('numerogogo');
-            return parseInt(inputgogo.value);
-        }
-
-        function procesarxd(numins) {
-            if (numins % 2 == 0) {
-                return "Es par.";
-            } else {
-                return "Es impar.";
-            }
-        }
-
-        function mostrarResultado(resultado) {
-            const parrafoResultado = document.getElementById('resultado');
-            parrafoResultado.textContent = resultado;
-        }
-
-        const botonEvaluar = document.getElementById('evaluar');
-            botonEvaluar.addEventListener('click', () => {
-            const numxd = tomarDatos();
-            if (isNaN(numxd)) {
-                mostrarResultado("Por favor, ingrese un número válido.");
-                return;
-            }
-            const resultado = procesarxd(numxd);
-            mostrarResultado(resultado);
-        });
-    </script>
 </body>
+<script>
+    function tomarDatos() {
+        const inputgogo = document.getElementById('numerogogo');
+        return parseInt(inputgogo.value);
+    }
+
+    function procesarxd(numins) {
+        if (numins % 2 == 0) {
+            return "Es par.";
+        } else {
+            return "Es impar.";
+        }
+    }
+
+    function mostrarResultado(resultado) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = resultado;
+    }
+
+    const botonEvaluar = document.getElementById('evaluar');
+        botonEvaluar.addEventListener('click', () => {
+        const numxd = tomarDatos();
+        if (isNaN(numxd)) {
+            mostrarResultado("Por favor, ingrese un número válido.");
+            return;
+        }
+        const resultado = procesarxd(numxd);
+        mostrarResultado(resultado);
+    });
+</script>
 </html>

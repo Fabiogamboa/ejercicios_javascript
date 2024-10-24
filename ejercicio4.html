@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificación del Estudiante</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .divgogo{
+            background-color:rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Calificación de Estudiantes segun rango :v</h1>
+        <input type="number" id="calificacion" placeholder="Ingrese la calificación">
+        <button id="evaluar">Evaluar</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputCalificacion = document.getElementById('calificacion');
+        return parseInt(inputCalificacion.value);
+    }
+
+    function procesarCalificacion(calificacion) {
+        if (calificacion <=20) {
+            return "Su calificacion es F.";
+        } else if (calificacion>=20 && calificacion <=40) {
+            return "Su calificacion es D.";
+        } else if (calificacion >=40 && calificacion<=60) {
+            return "su calificacion es C"
+        } else if (calificacion >=60 && calificacion<=80) {
+            return "su calificacion es B";
+        } else if  (calificacion >=80 && calificacion<=100) {
+            return "su calificacion es A";
+        } else{
+            return "Calificacion invalida";
+        }
+    }
+
+    function mostrarResultado(resultado) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = resultado;
+    }
+    
+    const botonEvaluar = document.getElementById('evaluar');
+        botonEvaluar.addEventListener('click', () => {
+        const calificacionEstudiante = tomarDatos();
+        if (calificacionEstudiante<0){
+            mostrarResultado("La calificación no puede ser negativa.");
+            return;
+        } else if (isNaN(calificacionEstudiante)) {
+            mostrarResultado("Por favor, ingrese un número válido.");
+            return;
+        }
+        const resultado = procesarCalificacion(calificacionEstudiante);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

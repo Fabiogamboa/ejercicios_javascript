@@ -27,37 +27,35 @@
         <button id="evaluar">Evaluar</button>
         <p id="resultado"></p>
     </div>
-
-    <script>
-
-        function tomarDatos() {
-            const inputCalificacion = document.getElementById('calificacion');
-            return parseInt(inputCalificacion.value);
-        }
-
-        function procesarCalificacion(calificacion) {
-            if (calificacion >= 60) {
-                return "El estudiante ha aprobado.";
-            } else {
-                return "El estudiante no ha aprobado.";
-            }
-        }
-
-        function mostrarResultado(resultado) {
-            const parrafoResultado = document.getElementById('resultado');
-            parrafoResultado.textContent = resultado;
-        }
-        
-        const botonEvaluar = document.getElementById('evaluar');
-            botonEvaluar.addEventListener('click', () => {
-            const calificacionEstudiante = tomarDatos();
-            if (isNaN(calificacionEstudiante)) {
-                mostrarResultado("Por favor, ingrese un número válido.");
-                return;
-            }
-            const resultado = procesarCalificacion(calificacionEstudiante);
-            mostrarResultado(resultado);
-        });
-    </script>
 </body>
+<script>
+    function tomarDatos() {
+        const inputCalificacion = document.getElementById('calificacion');
+        return parseInt(inputCalificacion.value);
+    }
+
+    function procesarCalificacion(calificacion) {
+        if (calificacion >= 60) {
+            return "El estudiante ha aprobado.";
+        } else {
+            return "El estudiante no ha aprobado.";
+        }
+    }
+
+    function mostrarResultado(resultado) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = resultado;
+    }
+    
+    const botonEvaluar = document.getElementById('evaluar');
+        botonEvaluar.addEventListener('click', () => {
+        const calificacionEstudiante = tomarDatos();
+        if (isNaN(calificacionEstudiante)) {
+            mostrarResultado("Por favor, ingrese un número válido.");
+            return;
+        }
+        const resultado = procesarCalificacion(calificacionEstudiante);
+        mostrarResultado(resultado);
+    });
+</script>
 </html>

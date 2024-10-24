@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom xd</title>
+    <style>
+        body{
+            background-image: url('https://images8.alphacoders.com/129/thumb-1920-1290057.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        div{
+            width: 20%;
+            border: 4px solid rgb(0, 0, 0);
+            font-size: 1em;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+        }
+
+        .clasejemplo{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: small;
+        }
+
+        #queso{
+            background-color: aqua;
+        }
+
+        button {
+            background: transparent; /* Fondo transparente */
+            color: #fdfdfd; /* Color del texto */
+            padding: 15px 30px;
+            border: 2px solid #6a11cb; 
+            border-radius: 15px;
+            cursor: pointer; 
+            transition: background 0.3s, color 0.3s;
+}
+
+button:hover {
+    background: #6a11cb;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <div id="id1">
+        <p>Esto es innerHTML, sirve para inyectar HTML desde un script</p>
+        <button onclick="prueba1()">Siguiente</button>
+    </div>
+
+    <div id="id2">
+        <p class="clasejemplo">esto es para probar un text content junto a un bucle pa cambiar el color de fondo xd</p>
+        <p class="clasejemplo">no se que mas poner xd</p>
+        <p class="clasejemplo" id="queso">ira un texto con color de fondo :v</p>
+        <button onclick="prueba2()">probar :v</button>
+        <button onclick="xd2()">volver xd</button>
+    </div>
+
+    <div id="id3">
+        <h2>parece que no cambio  nada</h2>
+        <p>pero d hecho simplemente agarre</p>
+        <p>todas las p xd</p>
+        <p>en teoria no se deberia dee ver el h2</p>
+        <p>los colores porque me gustan</p>
+        <button onclick="prueba3()">probar :v</button>
+        <button onclick="xd3()">volver gogo</button>
+    </div>
+
+    <div id="id4">
+        <p>
+            outerHTML es una propiedad que permite obtener o establecer el HTML completo de un elemento, incluyendo el propio elemento. 
+        </p>
+        <button onclick="prueba4()">Actualizar el segundo cuadraito :v</button>
+        <button onclick="xd4()">volverxd</button>
+    </div>
+
+    <script>
+        function prueba1() {
+            var div = document.getElementById("id1");
+            div.innerHTML = "<p>Contenido actualizado usando innerHTML.</p><button onclick='xd1()'>Volver</button>";
+        }
+
+        function xd1() {
+            var div1 = document.getElementById("id1");
+            div1.innerHTML = "<p>Esto es innerHTML, sirve para inyectar HTML desde un script</p><button onclick='prueba1()'>Siguiente</button>";
+        }
+
+        function prueba2(){
+            var div2 = document.getElementsByClassName("clasejemplo");
+            div2[1].textContent = "aca cambie el texto con el textcontentxd";
+            for (var i = 0; i < div2.length; i++){
+                div2[i].style.backgroundColor = "blue";
+            }  
+        }
+
+        function xd2() {
+            var div2 = document.getElementById("id2");
+            div2.innerHTML = `
+                <p class='clasejemplo'>esto es para probar un text content junto a un bucle pa cambiar el color de fondo xd</p>
+                <p class='clasejemplo'>no se que más poner xd</p>
+                <p class='clasejemplo' id='queso'>ira un texto con color de fondo :v</p>
+                <button onclick='prueba2()'>probar :v</button>
+                <button onclick='xd2()'>volver xd</button>
+                `;
+        }
+
+        function prueba3() {
+            var div3 = document.getElementById("id3");
+            var gogogo = div3.getElementsByTagName('p');
+
+            for (var i = 0; i < gogogo.length; i++) {
+                gogogo[i].textContent + '\n';//esta bendita n es pa saltaar un espacio y ya, no fastidien :(
+                gogogo[i].style.backgroundColor = "red"; 
+            }
+        }
+
+        function xd3(){
+            var div3 = document.getElementById("id3");
+            div3.innerHTML = `
+            <h2>parece que no cambio  nada</h2>
+            <p>pero d hecho simplemente agarre</p>
+            <p>todas las p xd</p>
+            <p>en teoria no se deberia dee ver el h2</p>
+            <p>los colores porque me gustan</p>
+            <button onclick="prueba3()">probar :v</button>
+            <button onclick="xd3()">volver gogo</button>
+            `;
+        }
+
+        function prueba4() {
+            var gogogo = document.querySelector('.clasejemplo');
+            gogogo.outerHTML = "<p class='clasejemplo'><strong>C actualizo esta wbada</strong></p>";
+        }
+
+        function xd4() {
+            var textogogogo = "<p class='clasejemplo'>esto es para probar un text content junto a un bucle pa cambiar el color de fondo xd</p>";
+            var gogo = document.querySelector('.clasejemplo');
+            gogo.outerHTML = textogogogo;
+        }
+
+
+    </script>
+</body>
+</html>
