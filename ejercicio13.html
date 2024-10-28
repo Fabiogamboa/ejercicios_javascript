@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Ascensor</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Simulación de Ascensor</h1>
+        <input type="number" id="pisoDeseado" placeholder="Ingrese el piso (1-5)">
+        <button id="irPiso">Ir al Piso</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputPisoDeseado = document.getElementById('pisoDeseado');
+        return parseInt(inputPisoDeseado.value);
+    }
+
+    function procesarPiso(piso) {
+        const pisosValidos = [1, 2, 3, 4, 5]; // Definimos los pisos válidos
+        if (pisosValidos.includes(piso)) {
+            return `El ascensor se mueve al piso ${piso}.`;
+        } else {
+            return "Error: Piso no válido. Por favor, elija un piso entre 1 y 5.";
+        }
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+    
+    const botonIrPiso = document.getElementById('irPiso');
+    botonIrPiso.addEventListener('click', () => {
+        const pisoDeseado = tomarDatos();
+        const resultado = procesarPiso(pisoDeseado);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor de Temperatura con Umbral de Alerta</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Sensor de Temperatura Ambiente</h1>
+        <input type="number" id="temperaturaActual" placeholder="Ingrese la temperatura (°C)">
+        <button id="evaluarTemperatura">Evaluar Temperatura</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    const UMBRAL_ALERTA = 30; // Umbral de alerta en grados Celsius
+
+    function tomarDatos() {
+        const inputTemperatura = document.getElementById('temperaturaActual');
+        return parseFloat(inputTemperatura.value);
+    }
+
+    function procesarTemperatura(temperatura) {
+        if (temperatura > UMBRAL_ALERTA) {
+            return "¡Alerta! La temperatura está por encima del umbral de alerta.";
+        } else {
+            return "La temperatura es normal.";
+        }
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonEvaluarTemperatura = document.getElementById('evaluarTemperatura');
+    botonEvaluarTemperatura.addEventListener('click', () => {
+        const temperaturaActual = tomarDatos();
+        if (isNaN(temperaturaActual)) {
+            mostrarResultado("Por favor, ingrese un valor válido.");
+            return;
+        }
+        const resultado = procesarTemperatura(temperaturaActual);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

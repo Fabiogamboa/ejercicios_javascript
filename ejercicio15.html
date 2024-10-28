@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor de Temperatura Ambiente</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Sensor de Temperatura Ambiente</h1>
+        <input type="number" id="temperaturaActual" placeholder="Ingrese la temperatura (°C)">
+        <button id="evaluarTemperatura">Evaluar Temperatura</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputTemperatura = document.getElementById('temperaturaActual');
+        return parseFloat(inputTemperatura.value);
+    }
+
+    function procesarTemperatura(temperatura) {
+        const rangoMinimo = 18; // Temperatura mínima aceptable
+        const rangoMaximo = 25; // Temperatura máxima aceptable
+
+        if (temperatura >= rangoMinimo && temperatura <= rangoMaximo) {
+            return "La temperatura es adecuada.";
+        } else {
+            return "La temperatura está fuera del rango deseado.";
+        }
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonEvaluarTemperatura = document.getElementById('evaluarTemperatura');
+    botonEvaluarTemperatura.addEventListener('click', () => {
+        const temperaturaActual = tomarDatos();
+        if (isNaN(temperaturaActual)) {
+            mostrarResultado("Por favor, ingrese un valor válido.");
+            return;
+        }
+        const resultado = procesarTemperatura(temperaturaActual);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

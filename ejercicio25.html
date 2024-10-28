@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir Números</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .divgogo {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Imprimir Números</h1>
+        <input type="number" id="numeroSolicitado" placeholder="Ingrese un número">
+        <button id="imprimirNumeros">Imprimir Números</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function tomarDatos() {
+            const inputNumero = document.getElementById('numeroSolicitado');
+            return parseInt(inputNumero.value);
+        }
+
+        function procesarNumero(numero) {
+            let numeros = [];
+            for (let i = 0; i <= numero; i++) {
+                numeros.push(i)
+            }
+            return numeros;
+        }
+
+        function mostrarResultado(numeros) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = `Números del 0 al ${numeros.length}: ${numeros}`;
+        }
+
+        const botonImprimirNumeros = document.getElementById('imprimirNumeros');
+        botonImprimirNumeros.addEventListener('click', () => {
+            const numeroSolicitado = tomarDatos();
+            const numerosProcesados = procesarNumero(numeroSolicitado);
+            mostrarResultado(numerosProcesados);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Calculadora Simple</h1>
+        <input type="number" id="numero1" placeholder="Ingrese el primer número">
+        <input type="number" id="numero2" placeholder="Ingrese el segundo número">
+        <input type="text" id="operador" placeholder="Ingrese el operador (+, -, *, /)">
+        <button id="calcular">Calcular</button>
+    </div>
+    <script>
+        // Solicita al usuario que ingrese dos números y un operador aritmético (+, -, *, /).
+        // Para realizar la operación correspondiente y mostrar el resultado en consola.
+
+        function tomarDatos() {
+            const num1 = parseFloat(document.getElementById('numero1').value);
+            const num2 = parseFloat(document.getElementById('numero2').value);
+            const operador = document.getElementById('operador').value;
+            return { num1, num2, operador };
+        }
+
+        function calcular(num1, num2, operador) {
+            let resultado;
+            switch (operador) {
+                case '+':
+                    resultado = num1 + num2;
+                    break;
+                case '-':
+                    resultado = num1 - num2;
+                    break;
+                case '*':
+                    resultado = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 !== 0) {
+                        resultado = num1 / num2;
+                    } else {
+                        return "Error: División por cero.";
+                    }
+                    break;
+                default:
+                    return "Error: Operador no válido.";
+            }
+            return `El resultado de ${num1} ${operador} ${num2} es: ${resultado}`;
+        }
+
+        document.getElementById('calcular').addEventListener('click', () => {
+            const { num1, num2, operador } = tomarDatos();
+            if (isNaN(num1) || isNaN(num2)) {
+                console.log("Por favor, ingrese números válidos.");
+                return;
+            }
+            const resultado = calcular(num1, num2, operador);
+            console.log(resultado);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificación de Estudiantes</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Calificación de Estudiantes</h1>
+        <input type="number" id="calificacion" placeholder="Ingrese la calificación (0-100)">
+        <button id="evaluarCalificacion">Evaluar Calificación</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    // Pide al usuario que ingrese una calificación numérica del 0 al 100.
+    // Para mostrar un mensaje dependiendo del rango de calificación (A, B, C, D, F).
+
+    function tomarDatos() {
+        const inputCalificacion = document.getElementById('calificacion');
+        return parseInt(inputCalificacion.value, 10);
+    }
+
+    function evaluarCalificacion(calificacion) {
+        let mensaje;
+
+        switch (true) {
+            case (calificacion >= 90 && calificacion <= 100):
+                mensaje = "Calificación: A";
+                break;
+            case (calificacion >= 80 && calificacion < 90):
+                mensaje = "Calificación: B";
+                break;
+            case (calificacion >= 70 && calificacion < 80):
+                mensaje = "Calificación: C";
+                break;
+            case (calificacion >= 60 && calificacion < 70):
+                mensaje = "Calificación: D";
+                break;
+            case (calificacion >= 0 && calificacion < 60):
+                mensaje = "Calificación: F";
+                break;
+            default:
+                mensaje = "Por favor, ingrese una calificación válida entre 0 y 100.";
+        }
+
+        return mensaje;
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonEvaluarCalificacion = document.getElementById('evaluarCalificacion');
+    botonEvaluarCalificacion.addEventListener('click', () => {
+        const calificacion = tomarDatos();
+        if (isNaN(calificacion)) {
+            mostrarResultado("Por favor, ingrese un número válido.");
+            return;
+        }
+        const resultado = evaluarCalificacion(calificacion);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

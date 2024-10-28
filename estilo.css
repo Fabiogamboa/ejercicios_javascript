@@ -1,0 +1,13 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.divgogo {
+    background-color: rgb(146, 146, 151);
+    padding: 30px;
+    border-radius: 25px;
+}

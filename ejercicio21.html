@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Asistente de Nutrición - Cálculo de IMC</h1>
+        <input type="number" id="peso" placeholder="Ingrese su peso (kg)" step="0.1">
+        <input type="number" id="altura" placeholder="Ingrese su altura (m)" step="0.01">
+        <button id="calcularIMC">Calcular IMC</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    // Programa para calcular el índice de masa corporal (IMC) y determinar la categoría
+
+    function tomarDatos() {
+        const peso = parseFloat(document.getElementById('peso').value);
+        const altura = parseFloat(document.getElementById('altura').value);
+        return { peso, altura };
+    }
+
+    function calcularIMC(peso, altura) {
+        return peso / (altura * altura);
+    }
+
+    function determinarCategoria(imc) {
+        let categoria;
+
+        switch (true) {
+            case (imc < 18.5):
+                categoria = "Bajo peso";
+                break;
+            case (imc < 24.9):
+                categoria = "Peso normal";
+                break;
+            case (imc < 29.9):
+                categoria = "Sobrepeso";
+                break;
+            default:
+                categoria = "Obesidad";
+        }
+
+        return categoria;
+    }
+
+    function mostrarResultado(imc, categoria) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `Su IMC es: ${imc.toFixed(2)} - Categoría: ${categoria}`;
+    }
+
+    const botonCalcularIMC = document.getElementById('calcularIMC');
+    botonCalcularIMC.addEventListener('click', () => {
+        const { peso, altura } = tomarDatos();
+        if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+            mostrarResultado(0, "Por favor, ingrese valores válidos para el peso y la altura.");
+            return;
+        }
+
+        const imc = calcularIMC(peso, altura);
+        const categoria = determinarCategoria(imc);
+        mostrarResultado(imc, categoria);
+    });
+</script>
+</html>

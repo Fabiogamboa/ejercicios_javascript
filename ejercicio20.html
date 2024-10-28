@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Costo de Compra en la Tienda</h1>
+        <input type="text" id="tipoProducto" placeholder="Ingrese tipo de producto (A, V, E)">
+        <input type="number" id="cantidad" placeholder="Ingrese la cantidad de unidades">
+        <button id="calcularCosto">Calcular Costo</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    // En una tienda se venden tres tipos de productos: "A" (alimentos), "V" (vestimenta) y "E" (electrónicos).
+    // Cada producto tiene un precio base diferente. Escribe un programa en que solicite al cliente el tipo de producto
+    // que desea comprar (A, V o E) y la cantidad de unidades. Para calcular el costo total de la compra. 
+    // Si el cliente compra productos de tipo "A", obtiene un 10% de descuento.
+    // Si compra productos de tipo "V", obtiene un 5% de descuento. 
+    // Si compra productos de tipo "E", no hay descuento.
+    // Finalmente, muestra el costo total de la compra con el descuento aplicado y el costo sin descuento.
+
+    const precios = {
+        A: 50,  // Precio base para alimentos
+        V: 30,  // Precio base para vestimenta
+        E: 100  // Precio base para electrónicos
+    };
+
+    function tomarDatos() {
+        const tipoProducto = document.getElementById('tipoProducto').value.toUpperCase();
+        const cantidad = parseInt(document.getElementById('cantidad').value, 10);
+        return { tipoProducto, cantidad };
+    }
+
+    function calcularCosto(tipoProducto, cantidad) {
+        let precioBase = precios[tipoProducto];
+        let descuento = 0;
+
+        switch (tipoProducto) {
+            case 'A':
+                descuento = 0.10; // 10% de descuento
+                break;
+            case 'V':
+                descuento = 0.05; // 5% de descuento
+                break;
+            case 'E':
+                descuento = 0; // Sin descuento
+                break;
+            default:
+                return null; // Tipo de producto no válido
+        }
+
+        const costoSinDescuento = precioBase * cantidad;
+        const costoConDescuento = costoSinDescuento - (costoSinDescuento * descuento);
+        return { costoSinDescuento, costoConDescuento };
+    }
+
+    function mostrarResultado(costoSinDescuento, costoConDescuento) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `Costo sin descuento: $${costoSinDescuento.toFixed(2)} | Costo con descuento: $${costoConDescuento.toFixed(2)}`;
+    }
+
+    const botonCalcularCosto = document.getElementById('calcularCosto');
+    botonCalcularCosto.addEventListener('click', () => {
+        const { tipoProducto, cantidad } = tomarDatos();
+        if (isNaN(cantidad) || cantidad <= 0) {
+            mostrarResultado("Por favor, ingrese una cantidad válida y positiva.");
+            return;
+        }
+
+        const costos = calcularCosto(tipoProducto, cantidad);
+        if (costos === null) {
+            mostrarResultado("Tipo de producto no válido. Ingrese A, V o E.");
+            return;
+        }
+
+        mostrarResultado(costos.costoSinDescuento, costos.costoConDescuento);
+    });
+</script>
+</html>

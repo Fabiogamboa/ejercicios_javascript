@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías de Edad</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Categorías de Edad</h1>
+        <input type="number" id="edad" placeholder="Ingrese su edad">
+        <button id="determinarCategoria">Determinar Categoría</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    // Solicita al usuario que ingrese su edad para determinar en qué categoría de edad se encuentra
+    // (niño, adolescente, adulto, adulto mayor) y muestra un mensaje acorde.
+
+    function tomarDatos() {
+        const inputEdad = document.getElementById('edad');
+        return parseInt(inputEdad.value, 10);
+    }
+
+    function determinarCategoria(edad) {
+        let mensaje;
+
+        switch (true) {
+            case (edad >= 0 && edad <= 12):
+                mensaje = "Eres un niño.";
+                break;
+            case (edad >= 13 && edad <= 17):
+                mensaje = "Eres un adolescente.";
+                break;
+            case (edad >= 18 && edad <= 64):
+                mensaje = "Eres un adulto.";
+                break;
+            case (edad >= 65):
+                mensaje = "Eres un adulto mayor.";
+                break;
+            default:
+                mensaje = "Edad no válida.";
+        }
+
+        return mensaje;
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonDeterminarCategoria = document.getElementById('determinarCategoria');
+    botonDeterminarCategoria.addEventListener('click', () => {
+        const edad = tomarDatos();
+        if (isNaN(edad) || edad < 0) {
+            mostrarResultado("Por favor, ingrese una edad válida.");
+            return;
+        }
+        const resultado = determinarCategoria(edad);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

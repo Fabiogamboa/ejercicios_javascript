@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Ascensor con Límite de Peso</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Simulación de Ascensor</h1>
+        <input type="number" id="pesoUsuario" placeholder="Ingrese su peso (kg)">
+        <input type="number" id="pisoDeseado" placeholder="Ingrese el piso (1-5)">
+        <button id="irPiso">Ir al Piso</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    const LIMITE_PESO = 300; // Límite de peso en kilogramos
+
+    function tomarDatos() {
+        const inputPesoUsuario = document.getElementById('pesoUsuario');
+        const inputPisoDeseado = document.getElementById('pisoDeseado');
+        return {
+            peso: parseFloat(inputPesoUsuario.value),
+            piso: parseInt(inputPisoDeseado.value)
+        };
+    }
+
+    function procesarDatos(peso, piso) {
+        const pisosValidos = [1, 2, 3, 4, 5]; // Definimos los pisos válidos
+
+        if (peso > LIMITE_PESO) {
+            return "Error: El ascensor está sobrecargado. Por favor, reduzca el peso.";
+        } else if (!pisosValidos.includes(piso)) {
+            return "Error: Piso no válido. Por favor, elija un piso entre 1 y 5.";
+        } else {
+            return `El ascensor se mueve al piso ${piso}.`;
+        }
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonIrPiso = document.getElementById('irPiso');
+    botonIrPiso.addEventListener('click', () => {
+        const { peso, piso } = tomarDatos();
+        if (isNaN(peso) || isNaN(piso)) {
+            mostrarResultado("Por favor, ingrese valores válidos.");
+            return;
+        }
+        const resultado = procesarDatos(peso, piso);
+        mostrarResultado(resultado);
+    });
+</script>
+</html>

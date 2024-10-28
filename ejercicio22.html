@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Virtual de Cine</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Asistente Virtual de Cine</h1>
+        <input type="number" id="edad" placeholder="Ingrese su edad" min="0">
+        <button id="recomendarPelicula">Recomendar Película</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    // Programa para recomendar películas basadas en la edad del usuario
+
+    function tomarEdad() {
+        const edad = parseInt(document.getElementById('edad').value, 10);
+        return edad;
+    }
+
+    function recomendarPelicula(edad) {
+        let recomendacion;
+
+        switch (true) {
+            case (edad < 7):
+                recomendacion = "Recomendamos películas animadas y educativas aptas para todas las edades.";
+                break;
+            case (edad >= 7 && edad <= 17):
+                recomendacion = "Sugerimos películas adecuadas para la familia, como animaciones, aventuras y comedias familiares.";
+                break;
+            case (edad >= 18 && edad <= 30):
+                recomendacion = "Ofrecemos una variedad de géneros, como acción, drama, comedia y ciencia ficción.";
+                break;
+            case (edad > 30):
+                recomendacion = "Recomendamos películas clásicas y dramas que pueden ser de su interés.";
+                break;
+            default:
+                recomendacion = "Por favor, ingrese una edad válida.";
+        }
+
+        return recomendacion;
+    }
+
+    function mostrarResultado(mensaje) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = mensaje;
+    }
+
+    const botonRecomendarPelicula = document.getElementById('recomendarPelicula');
+    botonRecomendarPelicula.addEventListener('click', () => {
+        const edad = tomarEdad();
+        if (isNaN(edad) || edad < 0) {
+            mostrarResultado("Por favor, ingrese una edad válida.");
+            return;
+        }
+
+        const recomendacion = recomendarPelicula(edad);
+        mostrarResultado(recomendacion);
+    });
+</script>
+</html>
