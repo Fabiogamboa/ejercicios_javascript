@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Descuento</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Cálculo de Descuento</h1>
+        <input type="number" id="monto" placeholder="Ingrese el monto total de compra" step="0.01">
+        <button id="calcular">Calcular Descuento</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputMonto = document.getElementById('monto');
+        return parseFloat(inputMonto.value);
+    }
+
+    function calcularDescuento(monto) {
+        let descuento = 0;
+        if (monto >= 1000) {
+            descuento = 0.10; // 10%
+        } else if (monto >= 500) {
+            descuento = 0.05; // 5%
+        }
+        return monto * (1 - descuento); // Monto total después del descuento
+    }
+
+    function mostrarResultado(montoConDescuento) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `Monto total con descuento: $${montoConDescuento.toFixed(2)}`;
+    }
+
+    const botonCalcular = document.getElementById('calcular');
+    botonCalcular.addEventListener('click', () => {
+        const monto = tomarDatos();
+        if (isNaN(monto) || monto < 0) {
+            mostrarResultado("Por favor, ingrese un monto válido.");
+            return;
+        }
+        const montoConDescuento = calcularDescuento(monto);
+        mostrarResultado(montoConDescuento);
+    });
+</script>
+</html>

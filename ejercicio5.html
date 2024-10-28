@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Determinar Número</title>
+    <title>Determinar Mayor</title>
     <style>
         body {
             width: 100vw;
@@ -22,25 +22,27 @@
 </head>
 <body>
     <div class="divgogo">
-        <h1>Determinar si un número es positivo, negativo o cero</h1>
-        <input type="number" id="numero" placeholder="Ingrese un número">
+        <h1>Determinar el Mayor de Dos Números</h1>
+        <input type="number" id="numero1" placeholder="Ingrese el primer número">
+        <input type="number" id="numero2" placeholder="Ingrese el segundo número">
         <button id="evaluar">Evaluar</button>
         <p id="resultado"></p>
     </div>
 </body>
 <script>
     function tomarDatos() {
-        const inputNumero = document.getElementById('numero');
-        return parseFloat(inputNumero.value);
+        const inputNumero1 = document.getElementById('numero1');
+        const inputNumero2 = document.getElementById('numero2');
+        return [parseFloat(inputNumero1.value), parseFloat(inputNumero2.value)];
     }
 
-    function procesarNumero(numero) {
-        if (numero > 0) {
-            return "El número es positivo.";
-        } else if (numero < 0) {
-            return "El número es negativo.";
+    function determinarMayor(num1, num2) {
+        if (num1 > num2) {
+            return `El mayor es: ${num1}`;
+        } else if (num2 > num1) {
+            return `El mayor es: ${num2}`;
         } else {
-            return "El número es cero.";
+            return "Ambos números son iguales.";
         }
     }
 
@@ -51,12 +53,12 @@
     
     const botonEvaluar = document.getElementById('evaluar');
     botonEvaluar.addEventListener('click', () => {
-        const numeroUsuario = tomarDatos();
-        if (isNaN(numeroUsuario)) {
-            mostrarResultado("Por favor, ingrese un número válido.");
+        const [numero1, numero2] = tomarDatos();
+        if (isNaN(numero1) || isNaN(numero2)) {
+            mostrarResultado("Por favor, ingrese números válidos.");
             return;
         }
-        const resultado = procesarNumero(numeroUsuario);
+        const resultado = determinarMayor(numero1, numero2);
         mostrarResultado(resultado);
     });
 </script>

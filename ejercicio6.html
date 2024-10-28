@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promedio de Dinero</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Promedio de Dinero entre Juan, David y José</h1>
+        <input type="number" id="dineroJuan" placeholder="Ingrese la cantidad de dinero que tiene Juan">
+        <button id="calcular">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputDineroJuan = document.getElementById('dineroJuan');
+        return parseFloat(inputDineroJuan.value);
+    }
+
+    function calcularDinero(dineroJuan) {
+        const dineroDavid = dineroJuan / 2;
+        const dineroJose = (dineroJuan + dineroDavid) / 2;
+        return [dineroJuan, dineroDavid, dineroJose];
+    }
+
+    function calcularPromedio(dineroJuan, dineroDavid, dineroJose) {
+        return (dineroJuan + dineroDavid + dineroJose) / 3;
+    }
+
+    function mostrarResultado(promedio) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `El promedio de dinero entre los tres es: $${promedio.toFixed(2)}`;
+    }
+    
+    const botonCalcular = document.getElementById('calcular');
+    botonCalcular.addEventListener('click', () => {
+        const dineroJuan = tomarDatos();
+        if (isNaN(dineroJuan) || dineroJuan <= 0) {
+            mostrarResultado("Por favor, ingrese una cantidad de dinero válida.");
+            return;
+        }
+        const [dineroJuanCalc, dineroDavid, dineroJose] = calcularDinero(dineroJuan);
+        const promedio = calcularPromedio(dineroJuanCalc, dineroDavid, dineroJose);
+        mostrarResultado(promedio);
+    });
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Triángulos</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Clasificación de Triángulos</h1>
+        <input type="number" id="lado1" placeholder="Ingrese el primer lado">
+        <input type="number" id="lado2" placeholder="Ingrese el segundo lado">
+        <input type="number" id="lado3" placeholder="Ingrese el tercer lado">
+        <button id="clasificar">Clasificar Triángulo</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputLado1 = document.getElementById('lado1');
+        const inputLado2 = document.getElementById('lado2');
+        const inputLado3 = document.getElementById('lado3');
+        return [parseFloat(inputLado1.value), parseFloat(inputLado2.value), parseFloat(inputLado3.value)];
+    }
+
+    function clasificarTriangulo(lado1, lado2, lado3) {
+        if (lado1 <= 0 || lado2 <= 0 || lado3 <= 0) {
+            return "Los lados deben ser mayores que cero.";
+        }
+        if (lado1 == lado2 && lado2 == lado3) {
+            return "El triángulo es equilátero.";
+        } else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+            return "El triángulo es isósceles.";
+        } else {
+            return "El triángulo es escaleno.";
+        }
+    }
+
+    function mostrarResultado(clasificacion) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = clasificacion;
+    }
+
+    const botonClasificar = document.getElementById('clasificar');
+    botonClasificar.addEventListener('click', () => {
+        const [lado1, lado2, lado3] = tomarDatos();
+        const clasificacion = clasificarTriangulo(lado1, lado2, lado3);
+        mostrarResultado(clasificacion);
+    });
+</script>
+</html>

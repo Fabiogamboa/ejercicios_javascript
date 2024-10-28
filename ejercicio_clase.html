@@ -26,7 +26,10 @@
             color: rgb(255, 255, 255);
             background-color: rgba(0,0,0,0.5);
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+            border-radius: 30px;
+            padding: 10px;
         }
 
         .clasejemplo{
@@ -61,19 +64,18 @@ button:hover {
     </div>
 
     <div id="id2">
-        <p class="clasejemplo">esto es para probar un text content junto a un bucle pa cambiar el color de fondo xd</p>
-        <p class="clasejemplo">no se que mas poner xd</p>
+        <p class="clasejemplo">esto es para probar un text content y a su vez el getElementsByClassName</p>
+        <p class="clasejemplo">El getElementsByClassName sirve para, obtener elementos por su nombre de clase? :0, no me lo esperaba XD</p>
         <p class="clasejemplo" id="queso">ira un texto con color de fondo :v</p>
         <button onclick="prueba2()">probar :v</button>
         <button onclick="xd2()">volver xd</button>
     </div>
 
     <div id="id3">
-        <h2>parece que no cambio  nada</h2>
-        <p>pero d hecho simplemente agarre</p>
-        <p>todas las p xd</p>
-        <p>en teoria no se deberia dee ver el h2</p>
-        <p>los colores porque me gustan</p>
+        <h2>Prueba de TagName</h2>
+        <p>Tagname sirve para agarrar todas las cosas que tengan una misma etiqueta</p>
+        <p>por ejemplo, aqui agarre todas las p xd</p>
+        <p>a su vez, usé el inner text, dale al boton probar pa ver como quedó :v</p>
         <button onclick="prueba3()">probar :v</button>
         <button onclick="xd3()">volver gogo</button>
     </div>
@@ -89,7 +91,7 @@ button:hover {
     <script>
         function prueba1() {
             var div = document.getElementById("id1");
-            div.innerHTML = "<p>Contenido actualizado usando innerHTML.</p><button onclick='xd1()'>Volver</button>";
+            div.innerHTML = "<p>Aca use innerHTML y getElementById pa cambiar :v</p><button onclick='xd1()'>Volver</button>";
         }
 
         function xd1() {
@@ -99,10 +101,11 @@ button:hover {
 
         function prueba2(){
             var div2 = document.getElementsByClassName("clasejemplo");
-            div2[1].textContent = "aca cambie el texto con el textcontentxd";
+            div2[1].textContent = "aca cambie el texto con el textcontentxd, y como lo use con indexacion, solo cambia este div :v";
             for (var i = 0; i < div2.length; i++){
                 div2[i].style.backgroundColor = "blue";
-            }  
+            };
+            div2[1].style.backgroundColor = "red";
         }
 
         function xd2() {
@@ -117,23 +120,22 @@ button:hover {
         }
 
         function prueba3() {
-            var div3 = document.getElementById("id3");
-            var gogogo = div3.getElementsByTagName('p');
+    var div3 = document.getElementById("id3");
+    var gogogo = div3.getElementsByTagName('p');
 
-            for (var i = 0; i < gogogo.length; i++) {
-                gogogo[i].textContent + '\n';//esta bendita n es pa saltaar un espacio y ya, no fastidien :(
-                gogogo[i].style.backgroundColor = "red"; 
-            }
-        }
+    // Cambiar el texto de los párrafos
+    gogogo[0].innerText = "inner text modifica solo el texto y  ya";
+    gogogo[1].innerText = "aqui ando usando inedaxcion para modificar cada p uno por 1";
+    gogogo[2].innerText = "<div>a diferencia de innerHTML, el text no incluye esas etiquetas, aqui por ejemplo le puse un div, y el inner text solo lo trata como texto planito xd :v </div>";
+}
 
         function xd3(){
             var div3 = document.getElementById("id3");
             div3.innerHTML = `
-            <h2>parece que no cambio  nada</h2>
-            <p>pero d hecho simplemente agarre</p>
-            <p>todas las p xd</p>
-            <p>en teoria no se deberia dee ver el h2</p>
-            <p>los colores porque me gustan</p>
+            <h2>Prueba de TagName</h2>
+            <p>Tagname sirve para agarrar todas las cosas que tengan una misma etiqueta</p>
+            <p>por ejemplo, aqui agarre todas las p xd</p>
+            <p>a su vez, usé el inner text, dale al boton probar pa ver como quedó :v</p>
             <button onclick="prueba3()">probar :v</button>
             <button onclick="xd3()">volver gogo</button>
             `;

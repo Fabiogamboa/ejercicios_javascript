@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Precio con Descuento</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Cálculo de Precio con Descuento</h1>
+        <input type="number" id="precio" placeholder="Ingrese el precio del producto" step="0.01">
+        <input type="number" id="cantidad" placeholder="Ingrese la cantidad comprada" step="1">
+        <button id="calcular">Calcular Precio Total</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputPrecio = document.getElementById('precio');
+        const inputCantidad = document.getElementById('cantidad');
+        return [parseFloat(inputPrecio.value), parseInt(inputCantidad.value)];
+    }
+
+    function calcularPrecioTotal(precio, cantidad) {
+        let total = precio * cantidad;
+        let descuento = 0;
+
+        if (cantidad >= 10) {
+            descuento = 0.10; // 10%
+        } else if (cantidad >= 5) {
+            descuento = 0.05; // 5%
+        }
+
+        total *= (1 - descuento); // Aplicar descuento
+        return total; // Precio total después del descuento
+    }
+
+    function mostrarResultado(precioTotal) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `Precio total a pagar: $${precioTotal.toFixed(2)}`;
+    }
+
+    const botonCalcular = document.getElementById('calcular');
+    botonCalcular.addEventListener('click', () => {
+        const [precio, cantidad] = tomarDatos();
+        if (isNaN(precio) || isNaN(cantidad) || precio < 0 || cantidad < 0) {
+            mostrarResultado("Por favor, ingrese valores válidos para el precio y la cantidad.");
+            return;
+        }
+        const precioTotal = calcularPrecioTotal(precio, cantidad);
+        mostrarResultado(precioTotal);
+    });
+</script>
+</html>

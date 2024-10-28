@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de IMC</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Cálculo de IMC</h1>
+        <input type="number" id="peso" placeholder="Ingrese su peso en kg" step="0.1">
+        <input type="number" id="altura" placeholder="Ingrese su altura en metros" step="0.01">
+        <button id="calcular">Calcular IMC</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputPeso = document.getElementById('peso');
+        const inputAltura = document.getElementById('altura');
+        return [parseFloat(inputPeso.value), parseFloat(inputAltura.value)];
+    }
+
+    function calcularIMC(peso, altura) {
+        return peso / (altura * altura);
+    }
+
+    function mostrarResultado(imc) {
+        const parrafoResultado = document.getElementById('resultado');
+        let mensaje;
+
+        if (imc < 18.5) {
+            mensaje = "Bajo peso";
+        } else if (imc >= 18.5 && imc < 25) {
+            mensaje = "Peso normal";
+        } else if (imc >= 25 && imc < 30) {
+            mensaje = "Sobrepeso";
+        } else {
+            mensaje = "Obesidad";
+        }
+
+        parrafoResultado.textContent = `Su IMC es: ${imc.toFixed(2)}. ${mensaje}`;
+    }
+    
+    const botonCalcular = document.getElementById('calcular');
+    botonCalcular.addEventListener('click', () => {
+        const [peso, altura] = tomarDatos();
+        if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+            mostrarResultado("Por favor, ingrese valores válidos para peso y altura.");
+            return;
+        }
+        const imc = calcularIMC(peso, altura);
+        mostrarResultado(imc);
+    });
+</script>
+</html>

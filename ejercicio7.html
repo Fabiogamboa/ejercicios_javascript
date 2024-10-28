@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promedio de Números</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .divgogo {
+            background-color: rgb(146, 146, 151);
+            padding: 30px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Promedio de Números</h1>
+        <input type="number" id="numero1" placeholder="Ingrese el primer número (1-10)">
+        <input type="number" id="numero2" placeholder="Ingrese el segundo número (1-10)">
+        <input type="number" id="numero3" placeholder="Ingrese el tercer número (1-10)">
+        <button id="calcular">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+<script>
+    function tomarDatos() {
+        const inputNumero1 = document.getElementById('numero1');
+        const inputNumero2 = document.getElementById('numero2');
+        const inputNumero3 = document.getElementById('numero3');
+        return [parseInt(inputNumero1.value), parseInt(inputNumero2.value), parseInt(inputNumero3.value)];
+    }
+
+    function calcularPromedio(numero1, numero2, numero3) {
+        return (numero1 + numero2 + numero3) / 3;
+    }
+
+    function mostrarResultado(promedio) {
+        const parrafoResultado = document.getElementById('resultado');
+        parrafoResultado.textContent = `El promedio es: ${promedio} y es mayor a 5: ${promedio > 5}`;
+    }
+    
+    const botonCalcular = document.getElementById('calcular');
+    botonCalcular.addEventListener('click', () => {
+        const [numero1, numero2, numero3] = tomarDatos();
+        if (isNaN(numero1) || isNaN(numero2) || isNaN(numero3)) {
+            mostrarResultado("Por favor, ingrese números válidos.");
+            return;
+        }
+        if (numero1 < 1 || numero1 > 10 || numero2 < 1 || numero2 > 10 || numero3 < 1 || numero3 > 10) {
+            mostrarResultado("Por favor, ingrese números entre 1 y 10.");
+            return;
+        }
+        const promedio = calcularPromedio(numero1, numero2, numero3);
+        mostrarResultado(promedio);
+    });
+</script>
+</html>
