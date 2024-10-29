@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Suma de Números Pares e Impares</title>
+</head>
+<body>
+    <script>
+        function pedirDatos() {
+            let numero = parseInt(prompt("Ingrese un número entero positivo:"));
+
+            if (isNaN(numero) || numero <= 0) {
+                alert("Error: Debe ingresar un número positivo.");
+                return null; // Retorna null si el no es válido, Y LAS 2 LINEAS SIGNIFICN O, Pa que no molesten xD
+            }
+            return numero;
+        }
+
+        function procesarDatos(numero) {
+            let sumaPares = 0;
+            let sumaImpares = 0;
+            let i = 1; // Inicializar el contador
+            
+            while (i <= numero) {
+                if (i % 2 === 0) {
+                    sumaPares += i; // Sumar si es par
+                } else {
+                    sumaImpares += i; // Sumar si es impar
+                }
+                i++;
+            }
+            return { sumaPares, sumaImpares };
+        }
+
+        function mostrarResultados(sumaPares, sumaImpares, numero) {
+            alert("La suma de los números pares desde 1 hasta " + numero + " es: " + sumaPares);
+            alert("La suma de los números impares desde 1 hasta " + numero + " es: " + sumaImpares);
+            console.log("La suma de los números pares es: " + sumaPares);
+            console.log("La suma de los números impares es: " + sumaImpares);
+        }
+
+        function main() {
+            let numero = pedirDatos();
+            if (numero !== null) { // Solo procesa si el número es válido
+                let { sumaPares, sumaImpares } = procesarDatos(numero);
+                mostrarResultados(sumaPares, sumaImpares, numero);
+            }
+        }
+
+        main(); // Llamar a la función principal
+    </script>
+</body>
+</html>
