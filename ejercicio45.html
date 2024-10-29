@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Numeros Positivos</title>
+    <title>Cajero Automático</title>
 </head>
 <body>
     <script>
-        let numeros = [];
+        function solicitarMonto(saldo) {
+            let monto = parseFloat(prompt("Ingrese el monto que desea retirar (Saldo disponible: $" + saldo + "):"));
+            return monto;
+        }
 
-        function tomarDatos() {
-            let numero;
-            do {
-                numero = parseFloat(prompt("Ingrese un numero positivo (o un numero negativo para terminar):"));
-                if (numero >= 0) {
-                    numeros.push(numero);
+        function procesarRetiro(monto, saldo) {
+            if (isNaN(monto) || monto <= 0) {
+                alert("Error: Debe ingresar un monto válido (número positivo).");
+                return saldo; // Retornar el saldo sin cambios
+            } else if (monto > saldo) {
+                alert("Error: El monto solicitado excede el saldo disponible.");
+                return saldo; // Retornar el saldo sin cambios
+            } else {
+                saldo -= monto; // Restar el monto del saldo
+                alert("Retiro exitoso. Saldo restante: $" + saldo);
+                return saldo; // Retornar el saldo actualizado
+            }
+        }
+
+        function iniciarCajero() {
+            let saldo = 1000; // Saldo inicial de la cuenta
+            let continuar = true;
+
+            while (continuar) {
+                let monto = solicitarMonto(saldo);
+                saldo = procesarRetiro(monto, saldo);
+
+                // Preguntar si el usuario desea continuar
+                let respuesta = prompt("¿Desea realizar otro retiro? (si/no)").toLowerCase();
+                if (respuesta !== "si") {
+                    continuar = false; // Salir del bucle
                 }
-            } while (numero >= 0);
-            
-            procesarDatos()
+            }
+
+            alert("Gracias por usar el cajero automático.");
         }
 
-        function procesarDatos() {
-            let suma = numeros.reduce((acumulador, numero) => acumulador + numero, 0);
-            imprimirResultado(suma)
-        }
-
-        function imprimirResultado(suma) {
-            alert("La suma de los numeros ingresados es: " + suma)
-            console.log("La suma de los numeros ingresados es: " + suma);
-        }
-
-        tomarDatos();
+        iniciarCajero();
     </script>
 </body>
 </html>

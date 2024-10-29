@@ -1,48 +1,108 @@
-6 de do-while:
+4 de do-while:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calculador de Promedios</title>
+    <title>Menú Restaurante</title>
 </head>
 <body>
     <script>
-        let notas = [];
+        let total = 0;
+        let platosSeleccionados = [];
+        let bebidasSeleccionadas = [];
 
         function tomarDatos() {
-            console.log("Bienvenido al calculador de promedios");
-            let resultado;
+            let subtotalPlatos = seleccionarPlatos();
+            let subtotalBebidas = seleccionarBebidas();
+            total = subtotalPlatos + subtotalBebidas;
+        }
+
+        function seleccionarPlatos() {
+            let subtotalPlatos = 0;
+            let plato;
+
             do {
-                let nota = parseFloat(prompt("Ingrese su calificación:"));
+                plato = parseInt(prompt("Seleccione un plato (1: pastas, 2: milanesa, 3: carne a la plancha, 4: sopa, 0: Terminar pedido): "));
                 
-                if (nota < 1) {
-                    alert("Número inválido");
-                    resultado = 1; // Seguir pidiendo notas
-                } else {
-                    notas.push(nota);
-                    resultado = parseInt(prompt("¿Desea ingresar alguna otra nota? Si: 1, No: 0"));
+                switch (plato) {
+                    case 1:
+                        subtotalPlatos += 20000;
+                        platosSeleccionados.push("Pastas");
+                        break;
+                    case 2:
+                        subtotalPlatos += 30000;
+                        platosSeleccionados.push("Milanesa");
+                        break;
+                    case 3:
+                        subtotalPlatos += 24000;
+                        platosSeleccionados.push("Carne a la plancha");
+                        break;
+                    case 4:
+                        subtotalPlatos += 18000;
+                        platosSeleccionados.push("Sopa");
+                        break;
+                    case 0:
+                        alert("Usted decidió terminar el pedido.")
+                        console.log("Usted decidió terminar el pedido.");
+                        break;
+                    default:
+                        alert("Error, ingrese una opción válida.")
+                        console.log("Error, ingrese una opción válida.");
                 }
-            } while (resultado !== 0);
-            procesarDatos()
+            } while (plato !== 0);
+            
+            return subtotalPlatos;
         }
 
-        function procesarDatos() {
-            let acum = notas.reduce((sum, nota) => sum + nota, 0);
-            let suma = notas.length;
-            let promedio=acum / suma;
-            imprimir(promedio)
+        function seleccionarBebidas() {
+            let subtotalBebidas = 0;
+            let bebida;
+
+            do {
+                bebida = parseInt(prompt("Seleccione una bebida (1: Coca-Cola, 2: malteada, 3: jugo de fresa, 4: agua, 0: Terminar pedido): "));
+                
+                switch (bebida) {
+                    case 1:
+                        subtotalBebidas += 2500;
+                        bebidasSeleccionadas.push("Coca-Cola");
+                        break;
+                    case 2:
+                        subtotalBebidas += 5000;
+                        bebidasSeleccionadas.push("Malteada");
+                        break;
+                    case 3:
+                        subtotalBebidas += 6000;
+                        bebidasSeleccionadas.push("Jugo de fresa");
+                        break;
+                    case 4:
+                        subtotalBebidas += 1200;
+                        bebidasSeleccionadas.push("Agua");
+                        break;
+                    case 0:
+                        alert("Usted decidió terminar el pedido.")
+                        console.log("Usted decidió terminar el pedido.");
+                        break;
+                    default:
+                        alert("Bebida inválida, seleccione una opción válida.")
+                        console.log("Bebida inválida, seleccione una opción válida.");
+                }
+            } while (bebida !== 0);
+            
+            return subtotalBebidas;
         }
 
-        function imprimir(promedio) {
-            if (promedio > 3.5) {
-                alert("¡Felicitaciones, aprobaste! Promedio: " + promedio.toFixed(2));
-                console.log("¡Felicitaciones, aprobaste! Promedio: " + promedio.toFixed(2));
-            } else {
-                alert("No aprobaste. Promedio: " + promedio.toFixed(2));
-                console.log("No aprobaste. Promedio: " + promedio.toFixed(2));
-            }
+        function imprimirResultado() {
+            alert("Gracias por comprar")
+            alert("El total a pagar es: " + total)
+            alert("Platos seleccionados: " + platosSeleccionados.join(", "))
+            alert("Bebidas seleccionadas: " + bebidasSeleccionadas.join(", "))
+            console.log("Gracias por comprar");
+            console.log("El total a pagar es: " + total);
+            console.log("Platos seleccionados: " + platosSeleccionados.join(", "));
+            console.log("Bebidas seleccionadas: " + bebidasSeleccionadas.join(", "));
         }
 
         tomarDatos();
+        imprimirResultado();
     </script>
 </body>
 </html>
