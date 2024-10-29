@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suma de Números</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Suma de Números</h1>
+        <input type="text" id="numero" placeholder="Ingrese un número">
+        <button id="agregarNumero">Agregar Númeru</button>
+        <button id="calcularSuma">Calcular Suma</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        const numeros = [];
+
+        function agregarNumero() {
+            const inputNumero = document.getElementById('numero');
+            const valor = inputNumero.value.trim();
+
+            if (valor.toLowerCase() === 'fin') {
+                return; // Termina la entrada de números
+            }
+
+            const numero = parseFloat(valor);
+            if (!isNaN(numero)) {
+                numeros.push(numero);
+                inputNumero.value = ''; // Limpia el campo de entrada
+                mostrarResultado(`Número ${numero} agregado.`);
+            } else {
+                mostrarResultado('Por favor, ingrese un número válido.');
+            }
+        }
+
+        function calcularSuma() {
+            const suma = numeros.reduce((acc, curr) => acc + curr, 0);
+            mostrarResultado(`La suma de los números ingresados es: ${suma}`);
+        }
+
+        function mostrarResultado(mensaje) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = mensaje;
+        }
+
+        document.getElementById('agregarNumero').addEventListener('click', agregarNumero);
+        document.getElementById('calcularSuma').addEventListener('click', calcularSuma);
+    </script>
+</body>
+</html>

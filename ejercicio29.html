@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Multiplicar</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            overflow: scroll;
+        }
+        .divgogo {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Tabla de Multiplicar del 1 al 10</h1>
+        <button id="mostrarTabla">Mostrar Tabla</button>
+        <pre id="resultado"></pre>
+    </div>
+
+    <script>
+        function generarTablaMultiplicar() {
+            let tabla = '';
+            for (let i = 1; i <= 10; i++) {
+                for (let j = 1; j <= 10; j++) {
+                    tabla += `${i} x ${j} = ${i * j}\n`;
+                }
+            }
+            return tabla;
+        }
+
+        function mostrarTabla(tabla) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = tabla;
+        }
+
+        function iniciar() {
+            const tablaMultiplicar = generarTablaMultiplicar();
+            mostrarTabla(tablaMultiplicar);
+        }
+
+        const botonMostrarTabla = document.getElementById('mostrarTabla');
+        botonMostrarTabla.addEventListener('click', iniciar);
+    </script>
+</body>
+</html>

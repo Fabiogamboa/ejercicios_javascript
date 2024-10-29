@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Factorial</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Calcular Factorialgogo</h1>
+        <input type="number" id="numeroSolicitado" placeholder="Ingrese un númeruwu" min="0">
+        <button id="calcularFactorial">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function tomarDatos() {
+            const inputNumero = document.getElementById('numeroSolicitado');
+            return parseInt(inputNumero.value);
+        }
+
+        function calcularFactorial(numero) {
+            if (numero <= 0) return "ingrese un numero valido pndjo";
+            let factorial = 1;
+            for (let i = 1; i <= numero; i++) {
+                factorial *= i;
+            }
+            return factorial;
+        }
+
+        function mostrarResultado(factorial) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = `El factorial es: ${factorial}`;
+            console.log(`El factorial de su número es: ${factorial}`);
+        }
+
+        const botonCalcularFactorial = document.getElementById('calcularFactorial');
+        botonCalcularFactorial.addEventListener('click', () => {
+            const numeroSolicitado = tomarDatos();
+            const factorial = calcularFactorial(numeroSolicitado);
+            mostrarResultado(factorial);
+        });
+    </script>
+</body>
+</html>

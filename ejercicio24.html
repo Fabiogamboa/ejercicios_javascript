@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Restaurante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .menu-item {
+            margin: 10px 0;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menú de Restaurante</h1>
+    
+    <h2>Platos</h2>
+    <div class="menu-item">
+        <input type="checkbox" id="plato1" value="10">
+        <label for="plato1">Plato 1 - $10</label>
+    </div>
+    <div class="menu-item">
+        <input type="checkbox" id="plato2" value="15">
+        <label for="plato2">Plato 2 - $15</label>
+    </div>
+    <div class="menu-item">
+        <input type="checkbox" id="plato3" value="20">
+        <label for="plato3">Plato 3 - $20</label>
+    </div>
+
+    <h2>Bebidas</h2>
+    <div class="menu-item">
+        <input type="checkbox" id="bebida1" value="5">
+        <label for="bebida1">Bebida 1 - $5</label>
+    </div>
+    <div class="menu-item">
+        <input type="checkbox" id="bebida2" value="7">
+        <label for="bebida2">Bebida 2 - $7</label>
+    </div>
+    <div class="menu-item">
+        <input type="checkbox" id="bebida3" value="3">
+        <label for="bebida3">Bebida 3 - $3</label>
+    </div>
+
+    <h2>Método de Pago</h2>
+    <select id="metodoPago">
+        <option value="">Seleccione un método de pago</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta de Crédito</option>
+        <option value="cheque">Cheque</option>
+    </select>
+
+    <button id="calcularTotal">Calcular Total</button>
+
+    <div class="total" id="resultado"></div>
+
+    <script>
+        // Escribe un programa que simule un menú de restaurante. El programa debe permitir al cliente
+        // seleccionar varios platos y bebidas, calcular el costo total y aplicar un descuento según el
+        // método de pago (efectivo, tarjeta de crédito o cheque).
+
+        document.getElementById('calcularTotal').addEventListener('click', () => {
+            // Obtener los platos seleccionados
+            const platos = document.querySelectorAll('input[type="checkbox"]:checked');
+            let total = 0;
+
+            // Calcular el costo total
+            platos.forEach(plato => {
+                total += parseFloat(plato.value);
+            });
+
+            // Obtener el método de pago
+            const metodoPago = document.getElementById('metodoPago').value;
+
+            // Aplicar descuento según el método de pago
+            let descuento = 0;
+            switch (metodoPago) {
+                case 'efectivo':
+                    descuento = total * 0.10; // 10% de descuento
+                    break;
+                case 'tarjeta':
+                    descuento = total * 0.05; // 5% de descuento
+                    break;
+                case 'cheque':
+                    descuento = total * 0.02; // 2% de descuento
+                    break;
+                default:
+                    descuento = 0; // Sin descuento si no se selecciona un método
+            }
+
+            // Calcular el total final
+            const totalFinal = total - descuento;
+
+            // Mostrar el resultado
+            document.getElementById('resultado').textContent = `Costo Total: $${total.toFixed(2)} - Descuento: $${descuento.toFixed(2)} - Total a Pagar: $${totalFinal.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

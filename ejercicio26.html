@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir Números</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .divgogo {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Imprimir Números xd</h1>
+        <input type="number" id="numeroSolicitado" placeholder="Ingrese un número">
+        <button id="imprimirNumeros">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function tomarDatos() {
+            const inputNumero = document.getElementById('numeroSolicitado');
+            return parseInt(inputNumero.value);
+        }
+
+        function procesarNumero(numero) {
+            let acumulador = 0;
+            for (let i = 0; i <= numero; i++) {
+                acumulador += i;
+            }
+            let promedio = acumulador / (numero + 1); // +1 porque incluye el 0
+            return { sumatoria: acumulador, promedio: promedio };
+        }
+
+        function mostrarResultado(resultados) {
+            const parrafoResultado = document.getElementById('resultado');
+            parrafoResultado.textContent = `Sumatoria: ${resultados.sumatoria}, Promedio: ${resultados.promedio}`;
+            console.log(`Sumatoria: ${resultados.sumatoria}`);
+            console.log(`Promedio: ${resultados.promedio}`);
+        }
+
+        const botonImprimirNumeros = document.getElementById('imprimirNumeros');
+        botonImprimirNumeros.addEventListener('click', () => {
+            const numeroSolicitado = tomarDatos();
+            const resultados = procesarNumero(numeroSolicitado);
+            mostrarResultado(resultados);
+        });
+    </script>
+</body>
+</html>

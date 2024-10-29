@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación Campeonato Deportivo</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="divgogo">
+        <h1>Sistema de Clasificación - Campeonato Deportivo</h1>
+        <input type="text" id="equipo1" placeholder="Ingrese el nombre del Equipo 1">
+        <input type="text" id="equipo2" placeholder="Ingrese el nombre del Equipo 2">
+        <select id="resultado">
+            <option value="">Seleccione el resultado</option>
+            <option value="ganado">Equipo 1 gana</option>
+            <option value="perdido">Equipo 2 gana</option>
+            <option value="empatado">Empate</option>
+        </select>
+        <button id="registrarResultado">Registrar Resultado</button>
+        <h2>Clasificación Actual</h2>
+        <pre id="clasificacion"></pre>
+    </div>
+
+    <script>
+        // Crea un programa que simule un sistema de clasificación para un campeonato deportivo.
+        // El programa debe solicitar al usuario que ingrese el resultado de un partido (ganado, perdido o empatado)
+        // y, según el resultado, otorgar puntos a los equipos y mostrar la clasificación actual.
+
+        const clasificacion = {};
+
+        function actualizarClasificacion(equipo, puntos) {
+            if (!clasificacion[equipo]) {
+                clasificacion[equipo] = 0; // Inicializa puntos si el equipo no existe
+            }
+            clasificacion[equipo] += puntos; // Suma puntos al equipo
+        }
+
+        function mostrarClasificacion() {
+            const clasificacionTexto = Object.entries(clasificacion)
+                .map(([equipo, puntos]) => `${equipo}: ${puntos} puntos`)
+                .join('\n');
+            document.getElementById('clasificacion').textContent = clasificacionTexto || "No hay resultados registrados.";
+        }
+
+        document.getElementById('registrarResultado').addEventListener('click', () => {
+            const equipo1 = document.getElementById('equipo1').value;
+            const equipo2 = document.getElementById('equipo2').value;
+            const resultado = document.getElementById('resultado').value;
+
+            if (!equipo1 || !equipo2 || !resultado) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            switch (resultado) {
+                case "ganado":
+                    actualizarClasificacion(equipo1, 3); // Equipo 1 gana
+                    actualizarClasificacion(equipo2, 0); // Equipo 2 pierde
+                    break;
+                case "perdido":
+                    actualizarClasificacion(equipo1, 0); // Equipo 1 pierde
+                    actualizarClasificacion(equipo2, 3); // Equipo 2 gana
+                    break;
+                case "empatado":
+                    actualizarClasificacion(equipo1, 1); // Ambos equipos obtienen 1 punto
+                    actualizarClasificacion(equipo2, 1);
+                    break;
+            }
+
+            mostrarClasificacion(); // Muestra la clasificación actual
+            document.getElementById('equipo1').value = '';
+            document.getElementById('equipo2').value = '';
+            document.getElementById('resultado').value = '';
+        });
+    </script>
+</body>
+</html>
